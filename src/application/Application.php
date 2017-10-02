@@ -16,12 +16,12 @@ class Application
     protected $service;
 
     /**
-     * Supply the service through setter injection.
+     * Supply the service through constructor injection.
      *
      * @param ServiceInterface $service
      *   The service we rely on.
      */
-    public function setService(ServiceInterface $service) {
+    public function __construct(ServiceInterface $service) {
         $this->service = $service;
     }
 
@@ -30,9 +30,6 @@ class Application
      */
     public function runService()
     {
-        if ($this->service instanceof ServiceInterface) {
-            return $this->service->run();
-        }
-        throw new \Exception('Service has gone away');
+        return $this->service->run();
     }
 }

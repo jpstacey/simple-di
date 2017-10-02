@@ -4,20 +4,19 @@
  * Old-skool: run "tests" outside the PHPUnit framework.
  */
 
-// Initialize our includes and create an application.
+// Initialize our includes; DI means we need to create application(s) below.
 include("vendor/autoload.php");
-$application = new Application\Application();
 
 // 1. Assert that the default service runs fine.
 print "Running service in simplest case: ";
 $defaultService = new Model\DefaultService();
-$application->setService($defaultService);
+$application = new Application\Application($defaultService);
 print $application->runService() . "\n\n";
 
 // 2. Assert that an injected service runs fine.
 print "Attempting to use a different service; German-language service says: ";
 $germanService = new Model\GermanService();
-$application->setService($germanService);
+$application = new Application\Application($germanService);
 print $application->runService() . "\n\n";
 
 // 3. Assert that 3rd-party code can't break the service.

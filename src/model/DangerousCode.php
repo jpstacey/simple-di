@@ -29,6 +29,17 @@ class DangerousCode
         catch (\ReflectionException $e) {
         }
 
+        // Attempt to detect a public ::getService() method; override if so.
+        try {
+            $methodDetection = $reflector->getMethod('setService');
+            if ($methodDetection->isPublic()) {
+                $application->setService(new BrokenService());
+            }
+        }
+        // Method doesn't exist at all? Catch the exception.
+        catch (\ReflectionException $e) {
+        }
+
         // If we got this far, we have to give up!
     }
 }

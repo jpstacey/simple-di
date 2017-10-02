@@ -13,7 +13,17 @@ class Application
     /**
      * @var ServiceInterface
      */
-    public $service;
+    protected $service;
+
+    /**
+     * Supply the service through setter injection.
+     *
+     * @param ServiceInterface $service
+     *   The service we rely on.
+     */
+    public function setService(ServiceInterface $service) {
+        $this->service = $service;
+    }
 
     /**
      * Run the service we rely on.

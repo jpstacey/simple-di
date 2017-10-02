@@ -17,12 +17,12 @@ class ApplicationIntegrationTest extends TestCase
 
         // 1. Assert that the default service runs fine.
         $defaultService = new Model\DefaultService();
-        $application->service = $defaultService;
+        $application->setService($defaultService);
         $this->assertEquals('SUCCESS', $application->runService());
 
         // 2. Assert that an injected service runs fine.
         $germanService = new Model\GermanService();
-        $application->service = $germanService;
+        $application->setService($germanService);
         $this->assertEquals('ERFOLG', $application->runService());
 
         // 3. Assert that 3rd-party code can't break the service.

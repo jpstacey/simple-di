@@ -10,6 +10,8 @@ $application = new Application\Application();
 
 // 1. Assert that the default service runs fine.
 print "Running service in simplest case: ";
+$defaultService = new Model\DefaultService();
+$application->service = $defaultService;
 print $application->runService() . "\n\n";
 
 // 2. Assert that an injected service runs fine.

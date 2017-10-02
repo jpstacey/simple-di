@@ -27,11 +27,7 @@ class ApplicationIntegrationTest extends TestCase
 
         // 3. Assert that 3rd-party code can't break the service.
         $dangerousCode = new Model\DangerousCode();
-        try {
-            $dangerousCode->messWith($application);
-        }
-        catch (\Exception $e) {
-        }
+        $dangerousCode->messWith($application);
         $application->runService();
     }
 }

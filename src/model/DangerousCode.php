@@ -14,6 +14,21 @@ class DangerousCode
      */
     public function messWith(Application $application)
     {
-        $application->service = new BrokenService();
+        // Use reflection (ugh) to work out what we can break!
+        $reflector = new \ReflectionClass($application);
+
+        // Attempt to detect a public $service property; unset if so.
+        try {
+            $methodDetection = $reflector->getProperty('service');
+            if ($methodDetection->isPublic()) {
+                $application->service = null;
+                return;
+            }
+        }
+        // Property doesn't exist at all? Catch the exception.
+        catch (\ReflectionException $e) {
+        }
+
+        // If we got this far, we have to give up!
     }
 }
